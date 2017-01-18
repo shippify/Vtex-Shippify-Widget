@@ -5,7 +5,6 @@ Shippify Inc.
 */
   var city = "";
   var country = "";
-  var enableMap = false;
   var isEditTask=true;
   var bounds;
   var city_location = {lat : DELIVERY_DEFAULT[1], lng :DELIVERY_DEFAULT[2]};
@@ -1096,7 +1095,7 @@ $(document).ready(function () {
 });
 
 function onShipping(){
-    if(window.location.href.indexOf("shipping") > -1&&enableMap) {
+    if(window.location.href.indexOf("shipping") > -1&&ENABLE_MAP) {
 
 		  var orderId = null;
 		  var cartProducts = PRODUCTS;

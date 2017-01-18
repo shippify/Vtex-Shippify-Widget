@@ -20,6 +20,7 @@ var COMPANY_EMAIL="{{EmailToReceiver}}";
 var COMPANY_SUBJECT="{{SubjectToReceiver}}";
 
 //Something about the default values and configuration to task.
+var ENABLE_MAP = [true|false];
 var AVAILABLE_DIMENSIONS = ["height","length","width"];
 var SIZE_FOR_DIMENSIONS = [50,80,120,150,150];
 var RADIO_DIMENTION = 10;
