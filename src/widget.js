@@ -1091,6 +1091,10 @@ $(document).ready(function () {
  	onShipping();
 });
 
+$(document).ready(function () {
+	onPayment();
+});
+
 function onShipping(){
     if(window.location.href.indexOf("shipping") > -1&&enableMap) {
 
@@ -1433,10 +1437,6 @@ function onShipping(){
 		  }
     }
 }
-
-$(document).ready(function () {
-	onPayment();
-});
 
 function onPayment(){
     if((window.location.href.indexOf("payment") > -1)||(window.location.href.indexOf("profile") > -1)) {
