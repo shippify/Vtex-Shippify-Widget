@@ -896,8 +896,6 @@ Shippify Inc.
     }
   }
 
-
-
   function getProductBySku(protocol,skuId){
     $.ajax({
       url     : protocol+"://"+API_URL_SKU+skuId,
