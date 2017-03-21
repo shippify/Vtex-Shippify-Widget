@@ -960,32 +960,6 @@ Shippify Inc.
   }
 
 
-
-  function basicAjaxRequestJSONP(methodName, endpointUrl,dataObj,onSuccess,onError){
-    $.ajax({
-      url     : endpointUrl,
-      type    : methodName,
-      dataType: "json",
-      crossDomain: true,
-      data    : dataObj,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader ("Authorization", "Basic " + btoa(API_ID+":"+API_TOKEN));
-      },
-      success : function(respObj){
-        printInConsole("Servidor Respondio");
-        onSuccess(respObj);
-      },
-      error : function(xhr,status,error){
-        printInConsole("error en la peticion "+JSON.stringify(errorObj));
-        printInConsole("Error:"+JSON.stringify(onError));
-        if(xhr.status > 500){
-          onError(errorObj);
-          return;
-        }
-      }
-    });
-  }
-
   function sendServer(){
     isEditTask=false;
     printInConsole(" POST CROSDOMAIN: "+ orderId);
@@ -1502,28 +1476,6 @@ function onPayment(){
 		    });
 		  }
 
-		  function basicAjaxRequestJSONP(methodName, endpointUrl,dataObj,onSuccess,onError){
-		    $.ajax({
-		      url     : endpointUrl,
-		      type    : methodName,
-		      dataType: "json",
-		      crossDomain: true,
-		      data    : dataObj,
-		      beforeSend: function (xhr) {
-		        xhr.setRequestHeader ("Authorization", "Basic " + btoa(API_ID+":"+API_TOKEN));
-		      },
-		      success : function(respObj){
-		        printInConsole("Servidor Respondio");
-		        onSuccess(respObj);
-		      },
-		      error : function(errorObj){
-		        printInConsole("error en la peticion "+JSON.stringify(errorObj));
-		        if(onError){
-		          onError(errorObj);
-		        }
-		      }
-		    });
-		  }
 
 		  function validateTask(task){
 		    try{
@@ -1757,14 +1709,40 @@ function onReadyOrderPlaced(){
       success : function(respObj){
         onSuccess(respObj);
       },
-      error : function(errorObj){
-        printInConsole('Error:'+JSON.stringify(errorObj));
-        if(onError){
+      error : function(xhr,status,error){
+        printInConsole("error en la peticion "+JSON.stringify(errorObj));
+        printInConsole("Error:"+JSON.stringify(onError));
+        if(xhr.status > 500){
           onError(errorObj);
+          return;
         }
       }
-
     });
   }
   retrieveServer();
+}
+
+function basicAjaxRequestJSONP(methodName, endpointUrl, dataObj, onSuccess, onError){
+  $.ajax({
+    url     : endpointUrl,
+    type    : methodName,
+    dataType: "json",
+    crossDomain: true,
+    data    : dataObj,
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader ("Authorization", "Basic " + btoa(API_ID+":"+API_TOKEN));
+    },
+    success : function(respObj){
+      printInConsole("Servidor Respondio");
+      onSuccess(respObj);
+    },
+    error : function(xhr,status,error){
+      printInConsole("error en la peticion "+JSON.stringify(errorObj));
+      printInConsole("Error:"+JSON.stringify(onError));
+      if(xhr.status > 500){
+        onError(errorObj);
+        return;
+      }
+    }
+  });
 }
