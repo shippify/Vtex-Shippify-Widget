@@ -975,17 +975,16 @@ Shippify Inc.
         printInConsole("Servidor Respondio");
         onSuccess(respObj);
       },
-      error : function(errorObj){
+      error : function(xhr,status,error){
         printInConsole("error en la peticion "+JSON.stringify(errorObj));
         printInConsole("Error:"+JSON.stringify(onError));
-          if(onError){
-            onError(errorObj);
-          }
+        if(xhr.status > 500){
+          onError(errorObj);
+          return;
+        }
       }
     });
   }
-
-  //Adding the function to the button at checkout to create a pending payment task in the server
 
   function sendServer(){
     isEditTask=false;
